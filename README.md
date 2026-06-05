@@ -21,7 +21,7 @@ For long-running production deployments, prefer [snapcd-deployment-docker](https
 
 ```
 snapcd-deployment-local/
-├── versions.env                    # SNAPCD_VERSION=1.3.0 — pinned release tag
+├── versions.env                    # SNAPCD_VERSION=1.3.1 — pinned release tag
 ├── install-all.sh                  # Calls each component's install.sh
 ├── run-all.sh                      # Runs all three with logs under .logs/
 ├── components/
