@@ -1,0 +1,24 @@
+# Downloaded binaries per component
+components/*/bin/
+
+# Runner local state
+components/runner/runnerdata/
+
+# Foreground-mode link created by run.sh — regenerated on every start
+components/*/bin/appsettings.json
+
+# Process-tracking files written by run-all.sh
+.pids/
+
+# Logs
+*.log
+
+# Editor / OS junk
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# AI assistant scratch directories
+.claude/
+.cursor/
