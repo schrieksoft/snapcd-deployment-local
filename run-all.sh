@@ -20,9 +20,9 @@ echo "Starting server (log: $LOG_DIR/server.log)"
 "$SCRIPT_DIR/components/server/run.sh" > "$LOG_DIR/server.log" 2>&1 &
 pids+=($!)
 
-echo "Waiting for server on http://localhost:8080…"
+echo "Waiting for server on http://localhost:5000…"
 for _ in {1..60}; do
-  if curl -sf "http://localhost:8080/healthz" >/dev/null 2>&1; then
+  if curl -sf "http://localhost:5000/healthz" >/dev/null 2>&1; then
     break
   fi
   sleep 2

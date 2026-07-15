@@ -12,4 +12,4 @@ ln -sf "$SCRIPT_DIR/config/appsettings.json" "$SCRIPT_DIR/bin/appsettings.json"
 
 cd "$SCRIPT_DIR/bin"
 export ASPNETCORE_ENVIRONMENT="${ASPNETCORE_ENVIRONMENT:-Production}"
-exec ./SnapCd.Server.Host --urls="${ASPNETCORE_URLS:-http://0.0.0.0:8080}"
+exec ./SnapCd.Server.Host --urls="${ASPNETCORE_URLS:-http://0.0.0.0:5000}"

@@ -67,9 +67,9 @@ Then install and run:
 ./run-all.sh
 ```
 
-`run-all.sh` writes per-component logs into `.logs/` and waits for `http://localhost:8080/healthz` before bringing up the Runner and Agent. Stop with Ctrl-C — all three processes shut down cleanly.
+`run-all.sh` writes per-component logs into `.logs/` and waits for `http://localhost:5000/healthz` before bringing up the Runner and Agent. Stop with Ctrl-C — all three processes shut down cleanly.
 
-Once the Server is up, sign in at <http://localhost:8080> with the pre-seeded credentials:
+Once the Server is up, sign in at <http://localhost:5000> with the pre-seeded credentials:
 
 - **Email:** `admin@preseeded.io`
 - **Password:** `Admin#123`
