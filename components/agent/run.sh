@@ -24,7 +24,13 @@ trap cleanup EXIT INT TERM
 SIDECAR_BIN="$SCRIPT_DIR/bin/sidecar-claude/snapcd-agent-sidecar-claude"
 if [[ -x "$SIDECAR_BIN" ]]; then
   echo "Starting Claude sidecar on port $SIDECAR_PORT"
-  PORT="$SIDECAR_PORT" ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-}" "$SIDECAR_BIN" &
+  # MCP is served at {SNAPCD_BASE_URL}/mcp. The sidecar refuses to start without it.
+  PORT="$SIDECAR_PORT" \
+  SNAPCD_BASE_URL="${SNAPCD_BASE_URL:-http://localhost:5000}" \
+  CLAUDE_CODE_OAUTH_TOKEN="${CLAUDE_CODE_OAUTH_TOKEN:-}" \
+  ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-}" \
+  GITHUB_TOKEN="${GITHUB_TOKEN:-}" \
+    "$SIDECAR_BIN" &
   SIDECAR_PID=$!
   sleep 2
 else

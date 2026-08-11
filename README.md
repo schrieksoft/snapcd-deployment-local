@@ -170,14 +170,22 @@ Edit `components/agent/config/appsettings.json`:
 - Set `Server.Url` to `https://snapcd.io` (or your Self-Hosted Server's URL).
 - Set `Agent.AgentId`, `Agent.OrganizationId`, `Agent.ClientId` and `Agent.ClientSecret` to the values shown when you registered the Agent.
 
-If you want the sidecar to call Anthropic directly using your own Anthropic API key, export it before launching:
+The sidecar needs exactly one Anthropic credential, exported before launching:
 
 ```bash
-export ANTHROPIC_API_KEY=sk-ant-…
+# A Claude subscription token…
+export CLAUDE_CODE_OAUTH_TOKEN=sk-ant-oat01-…
+# …or an Anthropic API key instead. Set one, not both.
+export ANTHROPIC_API_KEY=sk-ant-api03-…
+# Optional: a GitHub PAT, used by the sidecar's git/gh for the AutoFix path.
+export GITHUB_TOKEN=ghp_…
+
 ./components/agent/run.sh
 ```
 
-If left unset, the sidecar uses BYOK credentials configured on the Agent resource (it fetches them from the Server at mission time).
+`run.sh` passes all three through to the sidecar. With neither credential set the sidecar still starts and only fails when a mission calls for inference, so a running process is not evidence that the credential landed.
+
+`run.sh` also sets `SNAPCD_BASE_URL` (defaulting to `http://localhost:5000`, `/mcp` is appended), which the sidecar uses to reach the Server for MCP. Override it if your Server is elsewhere — it must match `Server.Url` in `appsettings.json`. The sidecar refuses to start without it, which surfaces as the orchestrator failing to connect on port 7001.
 
 The sidecar listens on port `7001` by default (override with `SIDECAR_PORT=… ./components/agent/run.sh`); the orchestrator finds it via `Agent.Sidecars[0].BaseUrl=http://localhost:7001` in `appsettings.json`.
 
